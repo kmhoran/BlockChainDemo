@@ -26,7 +26,6 @@ class Chain:
 
 
     def spawn_origin_block(self):
-        _difficulty = self.difficulty
 
         if(len(self.ledger) == 0):
             origin = Block(id=0, 
@@ -48,13 +47,13 @@ class Chain:
                           data=data,
                           previous_hash = last_block.hash,
                           workDifficulty = self.difficulty)
-        new_block.calculate_nonce()
         
+        # Do work!
+        new_block.calculate_nonce()
 
         temp_ledger.append(new_block)
 
-        self.try_replace_ledger(temp_ledger)
-            
+        self.try_replace_ledger(temp_ledger)            
     
 
 
@@ -76,8 +75,6 @@ class Chain:
     def is_ledger_valid(self, ledger):
         if(ledger is None or len(ledger) == 0):
             return false
-        
-        isledgerValid = True
 
         for i in range(len(ledger)-1, -1,-1):
             if i == 0:
@@ -86,15 +83,17 @@ class Chain:
                 continue
 
             if ledger[i].previous_hash != ledger[i-1].hash:
-                isledgerValid  = False
-
+                return False
+            
+            # This ine is not stricktly necessary, but 
+            # I like to keep a good sequence.
             if ledger[i].id - ledger[i-1].id != 1:
-                isledgerValid  = False
+                return False
             
             if not self.block_has_valid_proof_of_work(ledger[i]):
-                isledgerValid = False
+                return False
         
-        return isledgerValid 
+        return True
     
 
     
