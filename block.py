@@ -33,7 +33,6 @@ class Block:
     def calculate_nonce(self):
         start_time = int(round(time.time() * 1000))
         while(str(self.hash)[0:self.workDifficulty] != '0' * self.workDifficulty):
-            #print("{0} != {1}\n".format(str(self.hash)[0:self.workDifficulty], '0' * self.workDifficulty))
             self.nonce += 1
         
         self.workTime = int(round(time.time() * 1000)) - start_time
