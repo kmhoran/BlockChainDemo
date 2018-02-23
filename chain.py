@@ -11,7 +11,7 @@ class Chain:
 
     @property
     def difficulty(self):
-        return 1
+        return 3
 
     def __init__(self):
         self.ledger = []
@@ -33,7 +33,7 @@ class Chain:
                            timestamp= datetime.now,
                            data= Chain.origin_data(),
                            previous_hash="",
-                           workDifficulty= _difficulty)
+                           workDifficulty= 0)
         
             self.ledger.append(origin)
 

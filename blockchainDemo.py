@@ -3,28 +3,20 @@
 from chain import Chain
 
 def run():
-    chain1 = Chain()
-    
-    print(chain1)
-    firstBlock = chain1.ledger[0]
+    chain = Chain()
+    print("\n## Created chain with origin block. ##\n")
+    print(chain)
     print("\n")
-    print(firstBlock)
+    chain.add_block("This is the first real block!")
+    print("    >> Added block 1. <<\n")
+    chain.add_block({'name': 'new block', 'type':'test'})
+    print("    >> Added block 2. <<\n")
+    chain.add_block({'name': 'some other type of data', 'series':['a', 'b', 'c']})
+    print("    >> Added block 3. <<\n")
+    for i in range(len(chain.ledger)):
+        print(chain.ledger[i])
+        print("\n")
 
-    # print(chain1.is_chain_valid(chain1.blocks))
-    print("\n")
-    chain1.add_block("this is a new block")
-
-    latestBlock = chain1.ledger[-1]
-    print("\n")
-    
-    print(latestBlock)
-    print("\n")
-    chain1.add_block({'name': 'new block', 'type':'test'})
-    lastBlock = chain1.ledger[-1]
-    print("\n")
-    print(chain1)
-    print("\n")
-    print(lastBlock)
 
 
 if __name__ == "__main__":
